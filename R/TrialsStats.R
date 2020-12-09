@@ -134,15 +134,15 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
 
 
         if(means.gxe == T) {
-            line.means = (lsmeansLT(model = mt3, which = which.means, pairwise = F))
+            line.means = (lmerTest::lsmeansLT(model = mt3, which = which.means, pairwise = F))
 
         }
         else {
-        line.means = suppressMessages(lsmeansLT(model = mt3, which = varg, pairwise = F))
+        line.means = suppressMessages(lmerTest::lsmeansLT(model = mt3, which = varg, pairwise = F))
         }
 
         if(ASED == T) {
-        line.means.contrasts = suppressMessages(lsmeansLT(model = mt3,
+        line.means.contrasts = suppressMessages(lmerTest::lsmeansLT(model = mt3,
                                                           which = varg, pairwise = T))
         #SED = as.data.frame(contrast(line.means, method = "pairwise"))
         ASED = as.data.frame(mean(line.means.contrasts$'Std. Error'))
