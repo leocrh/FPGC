@@ -22,7 +22,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
                        reps=NULL, envs.col = NULL, means.gxe = F, which.means = NULL, ASED = F,
                        gxe.model=F, save.output = T, file.name= "line-means"){
     message("Loading H2 functions")
-    #source("C:/Users/LCRESPO/Documents/CIMMYT/Manuscripts/H2 functions.R")
+    source("C:/Users/LCRESPO/Documents/CIMMYT/Manuscripts/H2 functions.R")
     #message("Loading 'lmerTest' and 'stringr' packages")
     #library(lmerTest)
     #library(stringr)
@@ -57,7 +57,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         form.fixed2 = stringr::str_replace(string = form, pattern = torep, replacement = varg)
         form.fixed2 = stats::formula(paste(form.fixed2, collapse = " "))
 
-        mt3 = (lme4::lmer(form.fixed2, data = lm@frame))
+        mt3 = (lmerTest::lmer(form.fixed2, data = lm@frame))
 
         message("COMPUTING LSMEANS AND PAIRWISE COMPARISONS TO CALCULATE ASED")
 
@@ -129,21 +129,20 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         torep2 = paste("\\(1.\\|.",varge,"\\)", sep = "")
         form.fixed3 = stringr::str_replace(string = form.fixed2, pattern = torep2, replacement = varge)
         form.fixed3 = stats::formula(paste(form.fixed3, collapse = " "))
-        mt3 = (lme4::lmer(form.fixed3, data = lm@frame))
-
+        mt3 = (lmerTest::lmer(form.fixed3, data = lm@frame))
         message("COMPUTING LSMEANS AND PAIRWISE COMPARISONS TO CALCULATE ASED")
 
 
         if(means.gxe == T) {
-            line.means = (lmerTest::lsmeansLT(model = mt3, which = which.means, pairwise = F))
+            line.means = (lsmeansLT(model = mt3, which = which.means, pairwise = F))
 
         }
         else {
-        line.means = suppressMessages(lmerTest::lsmeansLT(model = mt3, which = varg, pairwise = F))
+        line.means = suppressMessages(lsmeansLT(model = mt3, which = varg, pairwise = F))
         }
 
         if(ASED == T) {
-        line.means.contrasts = suppressMessages(lmerTest::lsmeansLT(model = mt3,
+        line.means.contrasts = suppressMessages(lsmeansLT(model = mt3,
                                                           which = varg, pairwise = T))
         #SED = as.data.frame(contrast(line.means, method = "pairwise"))
         ASED = as.data.frame(mean(line.means.contrasts$'Std. Error'))
