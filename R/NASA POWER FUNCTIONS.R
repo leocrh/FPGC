@@ -7,14 +7,17 @@
 #                                                          #
 ############################################################
 
-#' clim.data Downloads climate data from the NASA POWER data base. This functions requires the nasapower library to be installed
+#' Download NASA POWER data
+#'
+#' @description  Downloads climate data from the NASA POWER data base. This functions requires the nasapower library to be installed
 #' @param t Is a dataframe with longitud and latitude in decimal formats and a "Loc_no" column as location ID.
 #' @param lon Is the column index in t that contains the longitud in decimal format
 #' @param lat Is the column index in t that contains the latitude in decimal format
 #' @param new.names Is a vector of new names for the variables to be extracted. Used for simplicity in naming the variables.
 #' @param ... Arguments passed to the get_power function
+#' @export
 
-clim.data = function(t = t, lon = NULL, lat = NULL, new.names = NULL, ... ){
+climdata = function(t = t, lon = NULL, lat = NULL, new.names = NULL, ... ){
 
 library(nasapower)
 t.split= split(t, t$Loc_no)
@@ -56,12 +59,15 @@ df
 #                                                          #
 ############################################################
 
-#' Function to summarize the climate date by groups of days for a single location. It requires the locs.merged.climate object which is the climate data.
+#' Summarize climdata outputs
+#'
+#' @description Function to summarize the climate date by groups of days for a single location. It requires the locs.merged.climate object which is the climate data.
 #' Dates must be in the appropriate format otherwise errors are shown
-#' @param df Is a data frame with the date of sowing, or a date from which the variables will start to be summarized
+#' @param df Is a data frame with the date of sowing (sowing.d), or a date from which the variables will start to be summarized.
 #' @param locs.merged.climate Is a one-row data frame that contains the climate data
 #' @param days Is the number of days after the initial date that will be consider to extract the data
 #' @param last.day Is the number of days that will be used to average the data. i.e, las.day must be <= than days and multiple of days
+#' @export
 
 periodic.extraction = function(df, locs.merged.climate = locs.merged.climate,
                                days=120, last.day=120){

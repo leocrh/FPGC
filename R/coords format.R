@@ -5,12 +5,15 @@
 #                                                          #
 ############################################################
 
-#' Changes the coordinates to decimal degrees from IWIS raw site files. It adds two columns to the input dataframe: lat and lon
+#' Format coordinates in degrees to decimal
+#'
+#' @description Changes the coordinates to decimal degrees from IWIS raw site files. It adds two columns to the input dataframe: lat and lon
 #' @param coords a data frame from IWIS database that contains the columns Long_degrees, Long_minutes, Lat_degrees and Lat_minutes.
+#' @export
 #' @examples
 #' coords = format.coords(coords)
 
-format.coords = function(coords) {
+formatcoords = function(coords) {
     coords$Long_degress = as.numeric(coords$Long_degress)
     coords$Lat_degress = as.numeric(coords$Lat_degress)
     coords$Long_minutes = as.numeric(coords$Long_minutes)

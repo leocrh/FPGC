@@ -1,4 +1,6 @@
-#' Function suited to prcess lme4 model objects to calculate the broad sense heritability, and statistical parameter of field experiments,
+#' Process lists of lme4 models
+#'
+#' @description Function suited to prcess lme4 model objects to calculate the broad sense heritability, and statistical parameter of field experiments,
 #' i.e, CV, ASED, LSD, etc.,
 #' @param lm Is an lme4 model object. It is a model where the genotypes are included as random effect to extract the G variance
 #' @param varg Is the genetic variance as expressed in the lme4 model object
@@ -12,9 +14,10 @@
 #' @param gxe.model Logical to indicate if the lme4 object model is a GxE type
 #' @param save.output Logical to indicate if the outuput of adjuste means and trial stats will be saved in the computer
 #' @param file.name Character to indicate the name of the file if save.output = TRUE.
+#' @export
 
 
-trial.stats.list = function(lm=lm, varg="g", varge=NULL,
+trialstatslist = function(lm=lm, varg="g", varge=NULL,
                        reps=NULL, envs.col = NULL, means.gxe = F, which.means = NULL, ASED = F,
                        gxe.model=F, save.output = T, file.name= "line-means"){
     message("Loading H2 functions")
@@ -25,7 +28,7 @@ trial.stats.list = function(lm=lm, varg="g", varge=NULL,
 
     if (gxe.model == F) {
         message("EXTRACTING VARIANCE COMPONENTS AND COMPUTING HERITABILITY")
-        sts = h2.single(lm, varg, reps)
+        sts = h2single(lm, varg, reps)
         sts = t(sts)
         colnames(sts)="Estimate"
         Grand.mean = as.data.frame(fixef(lm)[1])

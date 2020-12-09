@@ -12,16 +12,19 @@
 #                                                          #
 ##%######################################################%##
 
-#' Function to generate the G matrix from marker data.
+#' Generate G
+#'
+#' @description Function to generate the G matrix from marker data.
 #' @param X Is a Marker matrix with marker Ids are in columns and Individuals are in rows
 #' @param method One of  "cross.product", "cross.product.average" or "VanRaden". The default methods is "cross.product.average".
 #' "cross.product is simply XX'.
 #' "cross.product.average" is X centered and scaled and then XX' divided the number of markers
 #' "VanRaden" is X centered and scaled by the allele frequency as in VanRaden 2007.
+#' @export
 #' @examples G = G.matrix(X = x, method = "VanRaden")
 
 
-G.matrix = function(X = x, method = "cross.product.average") {
+Gmatrix = function(X = x, method = "cross.product.average") {
   if(method == "cross.product") {
     G1=tcrossprod(as.matrix(X))
     G1
@@ -63,9 +66,19 @@ G.matrix = function(X = x, method = "cross.product.average") {
 #                                                          #
 ##%######################################################%##
 
+#' PCA on G
+#'
+#' @description Function to perform the PCA on the kinship matrix
+#' @param G Is the relationship matrix
+#' @param n.clusters The number of cluster to be solved over the kmeans algorithm
+#' @param plot.var Logial to indicate if the scree plot is displayed
+#' @param plot.pca Logical to indicate if the PCA plot is displayed with ggplot2
+#' @param save.pca.plot Logical to indicate if the PCA plot will be saved
+#' @param pca.plot.name Is the name of the file for the saved plot
+#' @param ... Arguments passed to the ggsave function
+#' @export
 
-
-pca.structure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca.plot = F,
+pcaStructure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca.plot = F,
                          pca.plot.name = "PCA of G", ...) {
   q.est = prcomp(G)
   message("SUMMARY OF THE PCA ON G")
@@ -90,7 +103,7 @@ pca.structure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pc
 
 
   library(ggplot2)
-  pca.plot = ggplot(q.est.df, aes(x = PC1, y = PC2, group = cluster, col = cluster)) +
+  pca.plot = ggplot2::ggplot(q.est.df, aes(x = PC1, y = PC2, group = cluster, col = cluster)) +
   geom_hline(yintercept = 0, size = 0.1, linetype = "dashed") +
   geom_vline(xintercept = 0, size = 0.1, linetype = "dashed") +
   geom_point(size=3,alpha=0.8)+

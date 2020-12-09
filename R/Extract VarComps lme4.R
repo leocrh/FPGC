@@ -5,12 +5,15 @@
 #                                                          #
 ##%######################################################%##
 
-#' Extraction of variance components from an lme4 object
+#' Extract variance components
+#'
+#' @description  Extraction of variance components from an lme4 object
 #' @param lm Is a lme4 model objeject
+#' @export
 #' #' @examples
 #' vc = var.comps(lm)
 
-var.comps = function(lm) {
+varcomps = function(lm) {
   message("EXTRACTING VARIANCE COMPONENTS")
   varcomps = VarCorr(lm)
   varcomps = as.data.frame(varcomps, comp=c("Variance")); varcomps=varcomps[,c(1,4,5)]

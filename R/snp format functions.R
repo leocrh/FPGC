@@ -1,13 +1,14 @@
 
-#' hap.to.doubl
+#' Format IUPAC
 #'
-#' Function to convert HAPMAP format to double alleles with no separation, i.e, from A to AA, C to CC, R to AG, Y to CT, etc.,
+#' @description Function to convert HAPMAP format to double alleles with no separation, i.e, from A to AA, C to CC, R to AG, Y to CT, etc.,
 #' @param df Is a data frame that contains SNP data in IUPAC format
 #' @param snp.col Is the index where the SNP data starts in the data frame. Set to NULL if the SNPs are in rows
 #' @param is.gid.in.col Is a Logical to indicate if the individuals are in columns (TRUE) or in rows (FALSE). Default value is FALSE
 #' @param snp.names Is an index of the column where the SNP ids are if is.gid.in.col = TRUE
+#' @export
 
-hap.to.doubl = function(df = df,
+haptodoubl = function(df = df,
                         snp.col=NULL,
                         is.gid.in.col = FALSE,
                         snp.names = NULL) {
@@ -60,15 +61,18 @@ hap.to.doubl = function(df = df,
 #                                                          #
 ##%######################################################%##
 
-#' This function converts the hapmap formatto numeric by susing the SNPassoc package.
+#' Hapmap to numeric
+#'
+#' @description This function converts the hapmap format to numeric by using the SNPassoc package.
 #' @param df Is a dataframe where the markers are in columns and the gids are in rows
 #' @param g.names Is a vector of genotype ids (gids) taken from df
 #' @param snp.col Is the index where the marker data starts in the df
+#' @export
 
 
 library(SNPassoc)
 
-hpm.to.numeric.add = function(df = d, g.names = NULL, snp.col = NULL){
+hpmtonumericadd = function(df = d, g.names = NULL, snp.col = NULL){
   df = SNPassoc::setupSNP(data = df, colSNPs = snp.col:ncol(df), sep = "")
   df.num = apply(df, 2, additive)
   row.names(df.num) = g.names
@@ -92,12 +96,16 @@ hpm.to.numeric.add = function(df = d, g.names = NULL, snp.col = NULL){
 
 #Threshold is a value in %
 
-#' This function removes the missing marker data at certain threshold and plots  a histogram of the missing data
+#' Remove missing from X
+#'
+#'
+#' @description This function removes the missing marker data at certain threshold and plots  a histogram of the missing data
 #' @param X Is a marker matrix with markers in columns and gids in rows
 #' @param threshold Is a threshold for the % of the missing values in X
 #' @param plot.missing Is a Logical to indicate if the the histogram of missing values is plotted. Default is False
+#' @export
 
-rm.missing.snp = function(X = x, threshold = 20, plot.missing = F) {
+rmmissingsnp = function(X = x, threshold = 20, plot.missing = F) {
  if(sum(is.na(X)) == 0){
    stop("There are no missing values in X, have they been imputed?")}
 
@@ -118,12 +126,16 @@ rm.missing.snp = function(X = x, threshold = 20, plot.missing = F) {
 }
 
 
-#' This function is to remove the markers that have a determined proportion of heterozygotes
+#' Remove heterozygotes in X
+#'
+#'
+#' @description This function is to remove the markers that have a determined proportion of heterozygotes
 #' @param X Is a marker matrix with markers in columns and gids in rows
 #' @param threshold Is a threshold for the % of the heterozygotes in X
 #' @param plot.het Logical to indicate if the histogram of heterozygocity is displayed. Default is FALSE
+#' @export
 
-rm.het.snp = function(X = x, threshold = 10, plot.het = F) {
+rmhetsnp = function(X = x, threshold = 10, plot.het = F) {
   per.het = apply(gd.num, 2, function(x) {((sum(x[x==1]))/length(x))*100})
   het.keep = per.het[per.het < 10]
   X = as.data.frame(X)
@@ -150,17 +162,20 @@ rm.het.snp = function(X = x, threshold = 10, plot.het = F) {
 ############################################################
 #                                                          #
 #             This function removes markers at             #
-#           certain minor allele freq treshold.            #
+#           certain minor allele freq threshold.           #
 # If plot.minor.allele = T it plots a histogram of the MAF #
 #                                                          #
 ############################################################
 
-#' This function removes markers at certain minor allele freq treshold
+#' Filters MAF in X
+#'
+#' @description This function removes markers at certain minor allele freq threshold
 #' @param X Is a marker matrix with markers in columns and gids in rows
 #' @param minor.threshold Is a threshold for the minor allele frequency (MAF)
 #' @param plot.minor.allele Logial to indicate if the histogram of the MAF is displayed
+#' @export
 
-rm.minor.allele = function(X = x, minor.threshold = 0.05, plot.minor.allele = F) {
+rmminorallele = function(X = x, minor.threshold = 0.05, plot.minor.allele = F) {
   phat=colMeans(X, na.rm = T)/2
   MAF=ifelse(phat<0.5, phat, 1-phat)
   MAF = as.data.frame(MAF)
@@ -196,9 +211,13 @@ rm.minor.allele = function(X = x, minor.threshold = 0.05, plot.minor.allele = F)
 #NOTE: This routine will give the list only with monomorphic markers with missing values,
 #if you have monomorphic markers without missing values you have to remove it manually
 
-#' Impute is a function to perfomr marker imputation and provde a list of monomorphic markers with missing values.
+#' Impute X
+#'
+#'
+#' @description Impute is a function to perfomr marker imputation and provde a list of monomorphic markers with missing values.
 #' Monomorphic markers witout missing values have to be removed manually.
 #' @param X Is a numeric marker matrix
+#' @export
 #' @examples
 #' X.impute = Impute(X)
 
@@ -224,9 +243,15 @@ Impute=function(X)
 
 }
 
-#' this function takes the output of the Impute function to keep the adequate data matrix. Run after Impute
+#' Cleans Impute
+#'
+#'
+#' @description This function takes the output of the Impute function to keep the adequate data matrix. Run after Impute
 #' @param X the output of the Impute function
 #' @param out is the out element in the list from the Impute function
+#' @export
+#' @examples
+#' X = XImp(X, out = out)
 
 XImp = function(X, out=out) {
   if (length(out$monomorphic) == 0){
