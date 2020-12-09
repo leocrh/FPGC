@@ -1,15 +1,3 @@
-############################################################
-#                                                          #
-#       Function to convert HAPMAP format to double        #
-# alleles with no separation snp.col indicates the column  #
-#  number where the snps start is.gid.in.col indicates if  #
-#      the genotypes are in columns to then transpose      #
-#               the output   and generate a                #
-#         matrix of genotypes in rows and snps in          #
-#    columns snp.names is to indicate the column where     #
-#        the snp names are if is.gid.in.col is TRUE        #
-#                                                          #
-############################################################
 
 #' Function to convert HAPMAP format to double alleles with no separation, i.e, from A to AA, C to CC, R to AG, Y to CT, etc.,
 #' @param df Is a data frame that contains SNP data in IUPAC format
