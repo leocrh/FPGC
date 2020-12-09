@@ -69,7 +69,7 @@ df
 #' @param last.day Is the number of days that will be used to average the data. i.e, las.day must be <= than days and multiple of days
 #' @export
 
-periodic.extraction = function(df, locs.merged.climate = locs.merged.climate,
+periodicextraction = function(df = NULL, locs.merged.climate = NULL,
                                days=120, last.day=120){
     period = days-1 # "last.day" must be multiple of "days"
     df$date.covs = df$sowing.d + period
