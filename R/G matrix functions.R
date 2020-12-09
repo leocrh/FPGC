@@ -24,7 +24,7 @@
 
 
 
-Gmatrix = function(X = x, method = "cross.product.average") {
+Gmatrix = function(X = NULL, method = "cross.product.average") {
   if(method == "cross.product") {
     G1=tcrossprod(as.matrix(X))
     G1
@@ -80,7 +80,7 @@ Gmatrix = function(X = x, method = "cross.product.average") {
 
 pcaStructure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca.plot = F,
                          pca.plot.name = "PCA of G", ...) {
-  q.est = prcomp(G)
+  q.est = stats::prcomp(G)
   message("SUMMARY OF THE PCA ON G")
   print(summary(q.est))
   pcs = summary(q.est)
@@ -98,28 +98,28 @@ pcaStructure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca
   plot(q.est, type = "l")}
 
   q.est.df = data.frame(q.est$x)
-  fit1 <- kmeans(q.est.df, n.clusters, nstart = 100)
+  fit1 <- stats::kmeans(q.est.df, n.clusters, nstart = 100)
   q.est.df$cluster = as.factor(fit1$cluster)
 
 
   #library(ggplot2)
-  pca.plot = ggplot2::ggplot(q.est.df, aes(x = PC1, y = PC2, group = cluster, col = cluster)) +
-  geom_hline(yintercept = 0, size = 0.1, linetype = "dashed") +
-  geom_vline(xintercept = 0, size = 0.1, linetype = "dashed") +
-  geom_point(size=3,alpha=0.8)+
-  xlab(label = paste("PC1 Proportion of variance", pc1, sep = " ")) +
-  ylab(label = paste("PC2 Proportion of variance", pc2, sep = " ")) +
-  scale_y_continuous(breaks = seq(from = -20, to = 20, by = 2))+
-  scale_x_continuous(breaks = seq(from = -20, to = 20, by = 2))+
-  guides(colour = guide_legend("Group"))+
-  theme_minimal()+
-  theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5),
+  pca.plot = ggplot2::ggplot(q.est.df, ggplot2::aes(x = PC1, y = PC2, group = cluster, col = cluster)) +
+    ggplot2::geom_hline(yintercept = 0, size = 0.1, linetype = "dashed") +
+    ggplot2::geom_vline(xintercept = 0, size = 0.1, linetype = "dashed") +
+    ggplot2::geom_point(size=3,alpha=0.8)+
+    ggplot2::xlab(label = paste("PC1 Proportion of variance", pc1, sep = " ")) +
+    ggplot2::ylab(label = paste("PC2 Proportion of variance", pc2, sep = " ")) +
+    ggplot2::scale_y_continuous(breaks = seq(from = -20, to = 20, by = 2))+
+    ggplot2::scale_x_continuous(breaks = seq(from = -20, to = 20, by = 2))+
+    ggplot2::guides(colour = guide_legend("Group"))+
+    ggplot2::theme_minimal()+
+    ggplot2::theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5),
         legend.position = "bottom")
 
   if(plot.pca == T) {print(pca.plot)}
 
   if(save.pca.plot == T) {
-    ggsave(filename = paste(pca.plot.name, ".tiff", sep = ""), plot = pca.plot, path = getwd(),
+    ggplot2::ggsave(filename = paste(pca.plot.name, ".tiff", sep = ""), plot = pca.plot, path = getwd(),
           device = "tiff", ...)
   }
 

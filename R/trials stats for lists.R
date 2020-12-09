@@ -32,7 +32,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         sts = h2single(lm, varg, reps)
         sts = t(sts)
         colnames(sts)="Estimate"
-        Grand.mean = as.data.frame(fixef(lm)[1])
+        Grand.mean = as.data.frame(lme4::fixef(lm)[1])
         rownames(Grand.mean)="Grand mean"
         colnames(Grand.mean)="Estimate"
 
@@ -45,19 +45,19 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
 
         form.fixed = stringr::str_replace_all(string = form,
                                      pattern = c("\\(1" = "", "\\|" = "", "\\)" = ""))
-        form.fixed = formula(paste(form.fixed, collapse = " "))
+        form.fixed = stats::formula(paste(form.fixed, collapse = " "))
         #form.fixed = update.formula(form.fixed, value ~ . )
         mt2 = lm(form.fixed, data = lm@frame)
-        an = as.data.frame(anova(mt2))
+        an = as.data.frame(stats::anova(mt2))
         dof.res = an[nrow(an), 1]
 
         # fitting the lm with varg as fixed only
         form2 = gsub(pattern = " ", replacement = "", x = form)
         torep = paste("\\(1.\\|.", varg,"\\)", sep = "")
         form.fixed2 = stringr::str_replace(string = form, pattern = torep, replacement = varg)
-        form.fixed2 = formula(paste(form.fixed2, collapse = " "))
+        form.fixed2 = stats::formula(paste(form.fixed2, collapse = " "))
 
-        mt3 = (lmer(form.fixed2, data = lm@frame))
+        mt3 = (lme4::lmer(form.fixed2, data = lm@frame))
 
         message("COMPUTING LSMEANS AND PAIRWISE COMPARISONS TO CALCULATE ASED")
 
@@ -74,7 +74,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         CV <- 100*ASED/abs(Grand.mean)
         rownames(CV)="CV"
         colnames(CV)= "Estimate"
-        LSD <- ASED*qt(1-0.05/2, dof.res)
+        LSD <- ASED*stats::qt(1-0.05/2, dof.res)
         rownames(LSD) = "LSD"
         colnames(LSD)= "Estimate"
         sts = rbind(sts, Grand.mean, CV, LSD, ASED)
@@ -102,7 +102,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         sts = h2(lm, varg,varge, reps, envs.col)
         sts = t(sts)
         colnames(sts)="Estimate"
-        Grand.mean = as.data.frame(fixef(lm)[1])
+        Grand.mean = as.data.frame(lme4::fixef(lm)[1])
         rownames(Grand.mean)="Grand mean"
         colnames(Grand.mean)="Estimate"
 
@@ -115,9 +115,9 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
 
         form.fixed = stringr::str_replace_all(string = form,
                                      pattern = c("\\(1" = "", "\\|" = "", "\\)" = ""))
-        form.fixed = formula(paste(form.fixed, collapse = " "))
+        form.fixed = stats::formula(paste(form.fixed, collapse = " "))
         mt2 = lm(form.fixed, data = lm@frame)
-        an = as.data.frame(anova(mt2))
+        an = as.data.frame(stats::anova(mt2))
         dof.res = an[nrow(an), 1]
 
         # fitting the lm with varg as fixed only
@@ -128,8 +128,8 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         form.fixed2 = stringr::str_replace(string = form, pattern = torep, replacement = varg)
         torep2 = paste("\\(1.\\|.",varge,"\\)", sep = "")
         form.fixed3 = stringr::str_replace(string = form.fixed2, pattern = torep2, replacement = varge)
-        form.fixed3 = formula(paste(form.fixed3, collapse = " "))
-        mt3 = (lmer(form.fixed3, data = lm@frame))
+        form.fixed3 = stats::formula(paste(form.fixed3, collapse = " "))
+        mt3 = (lme4::lmer(form.fixed3, data = lm@frame))
 
         message("COMPUTING LSMEANS AND PAIRWISE COMPARISONS TO CALCULATE ASED")
 
@@ -154,7 +154,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         CV <- 100*ASED/abs(Grand.mean)
         rownames(CV)="CV"
         colnames(CV)= "Estimate"
-        LSD <- ASED*qt(1-0.05/2, dof.res)
+        LSD <- ASED*stats::qt(1-0.05/2, dof.res)
         rownames(LSD) = "LSD"
         colnames(LSD)= "Estimate"
         sts = rbind(sts, Grand.mean, CV, LSD, ASED)

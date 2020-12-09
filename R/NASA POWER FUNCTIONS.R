@@ -25,7 +25,7 @@ t.split = lapply(t.split, droplevels)
 #lon & lat must indicate column index where longitud and latitud are in the dataframe
 d = lapply(t.split, function(x) nasapower::get_power(lonlat = c(x[,lon], x[,lat]),...))
 
-d.d = melt(d, id = c("LON", "LAT"))
+d.d = reshape2::melt(d, id = c("LON", "LAT"))
 
 tmp <- plyr::ddply(d.d, .(L1, variable), transform, newid = paste(L1, seq_along(variable)))
 
@@ -81,16 +81,16 @@ periodic.extraction = function(df, locs.merged.climate = locs.merged.climate,
     period.covs = droplevels(period.covs)
     group.means = rep(1:(days/last.day), each=last.day)
     period.covs = cbind(period.covs, group.means)
-    library(doBy)
-    cov.means = summaryBy(rad + t.av + t.min + t.max + rel.h + dew.p + cdd
+    #library(doBy)
+    cov.means = doBy::summaryBy(rad + t.av + t.min + t.max + rel.h + dew.p + cdd
                           + clrsky + wind.speed
                           ~ group.means, data=period.covs, FUN = mean)
-    cov.pp.sum = summaryBy(pp ~ group.means, data = period.covs, FUN = sum)
+    cov.pp.sum = doBy::summaryBy(pp ~ group.means, data = period.covs, FUN = sum)
     f.env.covs = cbind(cov.means, cov.pp.sum$pp.sum)
     colnames(f.env.covs)[11] = "pp"
     library(reshape2)
-    f.conv.melt = melt(f.env.covs, id.vars = "group.means")
-    conv.cast = dcast(f.conv.melt, 1 ~ variable+group.means)
+    f.conv.melt = reshape2::melt(f.env.covs, id.vars = "group.means")
+    conv.cast = reshape2::dcast(f.conv.melt, 1 ~ variable+group.means)
     loc.env.covariables = cbind(df, conv.cast)
     loc.env.covariables = loc.env.covariables[, -c(15)]
     loc.env.covariables

@@ -8,7 +8,7 @@
 #' @param snp.names Is an index of the column where the SNP ids are if is.gid.in.col = TRUE
 #' @export
 
-haptodoubl = function(df = df,
+haptodoubl = function(df = NULL,
                         snp.col=NULL,
                         is.gid.in.col = FALSE,
                         snp.names = NULL) {
@@ -72,7 +72,7 @@ haptodoubl = function(df = df,
 
 #library(SNPassoc)
 
-hpmtonumericadd = function(df = d, g.names = NULL, snp.col = NULL){
+hpmtonumericadd = function(df = NULL, g.names = NULL, snp.col = NULL){
   df = SNPassoc::setupSNP(data = df, colSNPs = snp.col:ncol(df), sep = "")
   df.num = apply(df, 2, SNPassoc::additive)
   row.names(df.num) = g.names
@@ -105,7 +105,7 @@ hpmtonumericadd = function(df = d, g.names = NULL, snp.col = NULL){
 #' @param plot.missing Is a Logical to indicate if the the histogram of missing values is plotted. Default is False
 #' @export
 
-rmmissingsnp = function(X = x, threshold = 20, plot.missing = F) {
+rmmissingsnp = function(X = NULL, threshold = 20, plot.missing = F) {
  if(sum(is.na(X)) == 0){
    stop("There are no missing values in X, have they been imputed?")}
 
@@ -116,7 +116,7 @@ rmmissingsnp = function(X = x, threshold = 20, plot.missing = F) {
   X = as.data.frame(X)
 
   if(plot.missing == T) {
-    hist(per.missing, col = "black", border = "white",
+    graphics::hist(per.missing, col = "black", border = "white",
          main = "Histogram of missing markers",
          xlab = "Percentage of missing data", ylab = "Number of markers")
     X = as.data.frame(X)
@@ -135,8 +135,8 @@ rmmissingsnp = function(X = x, threshold = 20, plot.missing = F) {
 #' @param plot.het Logical to indicate if the histogram of heterozygocity is displayed. Default is FALSE
 #' @export
 
-rmhetsnp = function(X = x, threshold = 10, plot.het = F) {
-  per.het = apply(gd.num, 2, function(x) {((sum(x[x==1]))/length(x))*100})
+rmhetsnp = function(X = NULL, threshold = 10, plot.het = F) {
+  per.het = apply(X, 2, function(x) {((sum(x[x==1]))/length(x))*100})
   het.keep = per.het[per.het < 10]
   X = as.data.frame(X)
   X = X[, names(X) %in% names(het.keep)]
@@ -146,7 +146,7 @@ rmhetsnp = function(X = x, threshold = 10, plot.het = F) {
   print(dim(X))
 
   if(plot.het == T) {
-    hist(het.keep, col = "black", border = "white",
+    graphics::hist(het.keep, col = "black", border = "white",
          main = "Histogram of heterozygocity",
          xlab = "Percentage of heterozygocity", ylab = "Number of markers")
     X = as.data.frame(X)
@@ -175,7 +175,7 @@ rmhetsnp = function(X = x, threshold = 10, plot.het = F) {
 #' @param plot.minor.allele Logial to indicate if the histogram of the MAF is displayed
 #' @export
 
-rmminorallele = function(X = x, minor.threshold = 0.05, plot.minor.allele = F) {
+rmminorallele = function(X = NULL, minor.threshold = 0.05, plot.minor.allele = F) {
   phat=colMeans(X, na.rm = T)/2
   MAF=ifelse(phat<0.5, phat, 1-phat)
   MAF = as.data.frame(MAF)
@@ -188,7 +188,7 @@ rmminorallele = function(X = x, minor.threshold = 0.05, plot.minor.allele = F) {
   print(dim(X.maf))
 
   if(plot.minor.allele == T){
-    hist(phat.maf$phat, main="Histogram of allele frequency",
+    graphics::hist(phat.maf$phat, main="Histogram of allele frequency",
          col = "black", border = "white",
          xlab = "Allele frequency", ylab = "Number of markers")
   }
