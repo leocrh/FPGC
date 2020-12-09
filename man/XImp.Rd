@@ -2,7 +2,7 @@
 % Please edit documentation in R/snp format functions.R
 \name{XImp}
 \alias{XImp}
-\title{this function takes the output of the Impute function to keep the adequate data matrix. Run after Impute}
+\title{Cleans Impute}
 \usage{
 XImp(X, out = out)
 }
@@ -12,5 +12,5 @@ XImp(X, out = out)
 \item{out}{is the out element in the list from the Impute function}
 }
 \description{
-this function takes the output of the Impute function to keep the adequate data matrix. Run after Impute
+This function takes the output of the Impute function to keep the adequate data matrix. Run after Impute
 }

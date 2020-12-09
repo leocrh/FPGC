@@ -2,8 +2,7 @@
 % Please edit documentation in R/snp format functions.R
 \name{Impute}
 \alias{Impute}
-\title{Impute is a function to perfomr marker imputation and provde a list of monomorphic markers with missing values.
-Monomorphic markers witout missing values have to be removed manually.}
+\title{Impute X}
 \usage{
 Impute(X)
 }
@@ -13,7 +12,4 @@ Impute(X)
 \description{
 Impute is a function to perfomr marker imputation and provde a list of monomorphic markers with missing values.
 Monomorphic markers witout missing values have to be removed manually.
-}
-\examples{
-X.impute = Impute(X)
 }

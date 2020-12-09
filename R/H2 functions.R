@@ -10,11 +10,10 @@
 #' @param reps Is the name of the column in the data frame that contains the reps
 #' @param envs.col Is the name of the column in the data frame that contains the envrionments, treatments, etc.
 #' @export
-#' @examples
-#' H2 = h2(lm = lm, varg = "g", varge = "g:trt", reps = "reps", envs.col = "sites")
+
 
 h2 = function(lm=lm, varg="g", varge="g:trt", reps=NULL, envs.col = NULL){
-    varcomps = VarCorr(lm)
+    varcomps = lme4::VarCorr(lm)
     varcomps = as.data.frame(print(varcomps, comp=c("Variance"))); varcomps=varcomps[,c(1,4,5)]
     var.g = varcomps$vcov[varcomps$grp==varg]
     var.gxe = varcomps$vcov[varcomps$grp==varge]
@@ -35,14 +34,14 @@ h2 = function(lm=lm, varg="g", varge="g:trt", reps=NULL, envs.col = NULL){
 #'
 #' @description  h2.single Isa function to calculate the broad sense heritability from an lme4 model object that does not contain GxE interaction
 #' It only considers the two-way interaction between genotypes and environments.
+#' @param varg Is the genetic variance as expressed in the lme4 model object
 #' @param lm Is an lme4 model object with a GxE term.
 #' @param reps Is the name of the column in the data frame that contains the reps
 #' @export
-#' @examples
-#' H2 = h2.single(lm = lm, varg = "g", reps = "reps")
+
 
 h2single = function (lm=lm, varg="g", reps=NULL) {
-    varcomps = VarCorr(lm)
+    varcomps = lme4::VarCorr(lm)
     varcomps = as.data.frame(print(varcomps, comp=c("Variance"))); varcomps=varcomps[,c(1,4,5)]
     var.g = varcomps$vcov[varcomps$grp==varg]
     var.res = varcomps$vcov[varcomps$grp=="Residual"]

@@ -2,8 +2,7 @@
 % Please edit documentation in R/NASA POWER FUNCTIONS.R
 \name{periodic.extraction}
 \alias{periodic.extraction}
-\title{Function to summarize the climate date by groups of days for a single location. It requires the locs.merged.climate object which is the climate data.
-Dates must be in the appropriate format otherwise errors are shown}
+\title{Summarize climdata outputs}
 \usage{
 periodic.extraction(
   df,
@@ -13,7 +12,7 @@ periodic.extraction(
 )
 }
 \arguments{
-\item{df}{Is a data frame with the date of sowing, or a date from which the variables will start to be summarized}
+\item{df}{Is a data frame with the date of sowing (sowing.d), or a date from which the variables will start to be summarized.}
 
 \item{locs.merged.climate}{Is a one-row data frame that contains the climate data}
 

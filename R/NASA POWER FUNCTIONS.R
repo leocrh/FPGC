@@ -19,7 +19,7 @@
 
 climdata = function(t = t, lon = NULL, lat = NULL, new.names = NULL, ... ){
 
-library(nasapower)
+#library(nasapower)
 t.split= split(t, t$Loc_no)
 t.split = lapply(t.split, droplevels)
 #lon & lat must indicate column index where longitud and latitud are in the dataframe
@@ -27,10 +27,10 @@ d = lapply(t.split, function(x) nasapower::get_power(lonlat = c(x[,lon], x[,lat]
 
 d.d = melt(d, id = c("LON", "LAT"))
 
-tmp <- ddply(d.d, .(L1, variable), transform, newid = paste(L1, seq_along(variable)))
+tmp <- plyr::ddply(d.d, .(L1, variable), transform, newid = paste(L1, seq_along(variable)))
 
 
-df = dcast(tmp, L1 + LAT + LON + newid ~ variable, value.var = "value")
+df = reshape2::dcast(tmp, L1 + LAT + LON + newid ~ variable, value.var = "value")
 df = df[,-which(colnames(df) == "newid")]
 
 library(zoo)

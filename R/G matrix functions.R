@@ -21,7 +21,7 @@
 #' "cross.product.average" is X centered and scaled and then XX' divided the number of markers
 #' "VanRaden" is X centered and scaled by the allele frequency as in VanRaden 2007.
 #' @export
-#' @examples G = G.matrix(X = x, method = "VanRaden")
+
 
 
 Gmatrix = function(X = x, method = "cross.product.average") {
@@ -102,7 +102,7 @@ pcaStructure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca
   q.est.df$cluster = as.factor(fit1$cluster)
 
 
-  library(ggplot2)
+  #library(ggplot2)
   pca.plot = ggplot2::ggplot(q.est.df, aes(x = PC1, y = PC2, group = cluster, col = cluster)) +
   geom_hline(yintercept = 0, size = 0.1, linetype = "dashed") +
   geom_vline(xintercept = 0, size = 0.1, linetype = "dashed") +

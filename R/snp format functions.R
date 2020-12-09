@@ -70,11 +70,11 @@ haptodoubl = function(df = df,
 #' @export
 
 
-library(SNPassoc)
+#library(SNPassoc)
 
 hpmtonumericadd = function(df = d, g.names = NULL, snp.col = NULL){
   df = SNPassoc::setupSNP(data = df, colSNPs = snp.col:ncol(df), sep = "")
-  df.num = apply(df, 2, additive)
+  df.num = apply(df, 2, SNPassoc::additive)
   row.names(df.num) = g.names
   message("Dimentions and Head of the numeric marker data")
   print(dim(df.num))
@@ -218,8 +218,7 @@ rmminorallele = function(X = x, minor.threshold = 0.05, plot.minor.allele = F) {
 #' Monomorphic markers witout missing values have to be removed manually.
 #' @param X Is a numeric marker matrix
 #' @export
-#' @examples
-#' X.impute = Impute(X)
+
 
 
 Impute=function(X)
@@ -250,8 +249,7 @@ Impute=function(X)
 #' @param X the output of the Impute function
 #' @param out is the out element in the list from the Impute function
 #' @export
-#' @examples
-#' X = XImp(X, out = out)
+
 
 XImp = function(X, out=out) {
   if (length(out$monomorphic) == 0){

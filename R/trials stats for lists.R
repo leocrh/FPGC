@@ -14,6 +14,7 @@
 #' @param gxe.model Logical to indicate if the lme4 object model is a GxE type
 #' @param save.output Logical to indicate if the outuput of adjuste means and trial stats will be saved in the computer
 #' @param file.name Character to indicate the name of the file if save.output = TRUE.
+
 #' @export
 
 
@@ -23,8 +24,8 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
     message("Loading H2 functions")
     #source("C:/Users/LCRESPO/Documents/CIMMYT/Manuscripts/H2 functions.R")
     message("Loading 'lmerTest' and 'stringr' packages")
-    library(lmerTest)
-    library(stringr)
+    #library(lmerTest)
+    #library(stringr)
 
     if (gxe.model == F) {
         message("EXTRACTING VARIANCE COMPONENTS AND COMPUTING HERITABILITY")
@@ -35,14 +36,14 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         rownames(Grand.mean)="Grand mean"
         colnames(Grand.mean)="Estimate"
 
-        varcomps = VarCorr(lm)
+        varcomps = lme4::VarCorr(lm)
         varcomps = as.data.frame(varcomps, comp=c("Variance")); varcomps=varcomps[,c(1,4,5)]
 
         # fitting the lm as fixed effect to obtain residual DF
         form = summary(lm)$call$formula
         form = deparse(form)
 
-        form.fixed = str_replace_all(string = form,
+        form.fixed = stringr::str_replace_all(string = form,
                                      pattern = c("\\(1" = "", "\\|" = "", "\\)" = ""))
         form.fixed = formula(paste(form.fixed, collapse = " "))
         #form.fixed = update.formula(form.fixed, value ~ . )
@@ -53,7 +54,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         # fitting the lm with varg as fixed only
         form2 = gsub(pattern = " ", replacement = "", x = form)
         torep = paste("\\(1.\\|.", varg,"\\)", sep = "")
-        form.fixed2 = str_replace(string = form, pattern = torep, replacement = varg)
+        form.fixed2 = stringr::str_replace(string = form, pattern = torep, replacement = varg)
         form.fixed2 = formula(paste(form.fixed2, collapse = " "))
 
         mt3 = (lmer(form.fixed2, data = lm@frame))
@@ -61,10 +62,10 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         message("COMPUTING LSMEANS AND PAIRWISE COMPARISONS TO CALCULATE ASED")
 
 
-        line.means = lsmeansLT(model = mt3, which = varg, pairwise = F)
+        line.means = lmerTest::lsmeansLT(model = mt3, which = varg, pairwise = F)
 
         if(ASED == T){
-        line.means.contrasts = suppressMessages(lsmeansLT(model = mt3,
+        line.means.contrasts = suppressMessages(lmerTest::lsmeansLT(model = mt3,
                                                           which = varg, pairwise = T))
         ASED = as.data.frame(mean(line.means.contrasts$'Std. Error'))
                 rownames(ASED)="ASED"
@@ -105,14 +106,14 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
         rownames(Grand.mean)="Grand mean"
         colnames(Grand.mean)="Estimate"
 
-        varcomps = VarCorr(lm)
+        varcomps = lme4::VarCorr(lm)
         varcomps = as.data.frame(varcomps, comp=c("Variance")); varcomps=varcomps[,c(1,4,5)]
 
         # fitting the lm as fixed effect to obtain residual DF
         form = summary(lm)$call$formula
         form = deparse(form)
 
-        form.fixed = str_replace_all(string = form,
+        form.fixed = stringr::str_replace_all(string = form,
                                      pattern = c("\\(1" = "", "\\|" = "", "\\)" = ""))
         form.fixed = formula(paste(form.fixed, collapse = " "))
         mt2 = lm(form.fixed, data = lm@frame)
@@ -124,9 +125,9 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
 
         form2 = gsub(pattern = " ", replacement = "", x = form)
         torep = paste("\\(1.\\|.", varg,"\\)", sep = "")
-        form.fixed2 = str_replace(string = form, pattern = torep, replacement = varg)
+        form.fixed2 = stringr::str_replace(string = form, pattern = torep, replacement = varg)
         torep2 = paste("\\(1.\\|.",varge,"\\)", sep = "")
-        form.fixed3 = str_replace(string = form.fixed2, pattern = torep2, replacement = varge)
+        form.fixed3 = stringr::str_replace(string = form.fixed2, pattern = torep2, replacement = varge)
         form.fixed3 = formula(paste(form.fixed3, collapse = " "))
         mt3 = (lmer(form.fixed3, data = lm@frame))
 
@@ -134,15 +135,15 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
 
 
         if(means.gxe == T) {
-            line.means = (lsmeansLT(model = mt3, which = which.means, pairwise = F))
+            line.means = (lmerTest::lsmeansLT(model = mt3, which = which.means, pairwise = F))
 
         }
         else {
-        line.means = suppressMessages(lsmeansLT(model = mt3, which = varg, pairwise = F))
+        line.means = suppressMessages(lmerTest::lsmeansLT(model = mt3, which = varg, pairwise = F))
         }
 
         if(ASED == T) {
-        line.means.contrasts = suppressMessages(lsmeansLT(model = mt3,
+        line.means.contrasts = suppressMessages(lmerTest::lsmeansLT(model = mt3,
                                                           which = varg, pairwise = T))
         #SED = as.data.frame(contrast(line.means, method = "pairwise"))
         ASED = as.data.frame(mean(line.means.contrasts$'Std. Error'))

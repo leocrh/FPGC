@@ -8,9 +8,19 @@ Authors@R:
            email = "leonardoabdiel@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: FPGC has three sets of functions 1) o process models from the lme4 package to obtain various trial statistics; 2)to format and filter genotypic data to generate G matrix; and 3) to download and process climate data from the NASA POWER database
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
+Imports: 
+    ggplot2 (>= 3.3.2),
+    SNPassoc (>= 2.0.2),
+    lmerTest (>= 3.1.3),
+    lme4 (>= 1.1.26),
+    reshape2 (>= 1.4.4),
+    doBy (>= 4.6.8),
+    nasapower (>= 3.0.1),
+    plyr (>= 1.8.6),
+    stringr (>= 1.4.0),
+    zoo (>= 1.8.8)

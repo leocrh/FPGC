@@ -2,8 +2,7 @@
 % Please edit documentation in R/H2 functions.R
 \name{h2}
 \alias{h2}
-\title{h2 is a function to estimate broad sense heritaiblity of multienvironmental trials from the variance components of an lme4 model object.
-It only considers the two-way interaction between genotypes and environments.}
+\title{Broad sense heritability in G + E + GxE models}
 \usage{
 h2(lm = lm, varg = "g", varge = "g:trt", reps = NULL, envs.col = NULL)
 }
@@ -21,7 +20,4 @@ h2(lm = lm, varg = "g", varge = "g:trt", reps = NULL, envs.col = NULL)
 \description{
 h2 is a function to estimate broad sense heritaiblity of multienvironmental trials from the variance components of an lme4 model object.
 It only considers the two-way interaction between genotypes and environments.
-}
-\examples{
-H2 = h2(lm = lm, varg = "g", varge = "g:trt", reps = "reps", envs.col = "sites")
 }
