@@ -1,0 +1,16 @@
+Package: FPGC
+Title: Help functions to process Phenotypic Genomic and Climate data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Leo",
+           family = "Crespo",
+           role = c("aut", "cre"),
+           email = "leonardoabdiel@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: FPGC has thre sets of functions 1) o process models from the lme4 package to obtain various trial statistics; 2)to format and filter genotypic data to generate G matrix; and 3) to download and process climate data from the NASA POWER database
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9000
