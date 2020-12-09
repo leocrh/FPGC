@@ -1,4 +1,6 @@
 
+#' hap.to.doubl
+#'
 #' Function to convert HAPMAP format to double alleles with no separation, i.e, from A to AA, C to CC, R to AG, Y to CT, etc.,
 #' @param df Is a data frame that contains SNP data in IUPAC format
 #' @param snp.col Is the index where the SNP data starts in the data frame. Set to NULL if the SNPs are in rows
