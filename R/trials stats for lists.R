@@ -88,8 +88,8 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
             nm = paste(file.name, "_MEANS.csv", sep = "")
             nm.sts = paste(file.name, "_STATS.csv", sep = "")
             #line.means = cbind(file.name, line.means)
-            write.csv(line.means, file = nm)
-            write.csv(sts, file = nm.sts)
+            utils::write.csv(line.means, file = nm)
+            utils::write.csv(sts, file = nm.sts)
         }
 
         means.sts.list = list(medias = as.data.frame(line.means), sts = sts)
@@ -166,8 +166,8 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
             nm = paste(file.name, "_MEANS.csv", sep = "")
             nm.sts = paste(file.name, "_STATS.csv", sep = "")
             line.means = cbind(file.name, line.means)
-            write.csv(line.means, file = nm)
-            write.csv(sts, file = nm.sts)
+            utils::write.csv(line.means, file = nm)
+            utils::write.csv(sts, file = nm.sts)
         }
 
         means.sts.list = list(medias = as.data.frame(line.means), sts = sts)

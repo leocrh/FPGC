@@ -4,7 +4,7 @@
 \alias{rmmissingsnp}
 \title{Remove missing from X}
 \usage{
-rmmissingsnp(X = x, threshold = 20, plot.missing = F)
+rmmissingsnp(X = NULL, threshold = 20, plot.missing = F)
 }
 \arguments{
 \item{X}{Is a marker matrix with markers in columns and gids in rows}

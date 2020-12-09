@@ -103,7 +103,8 @@ pcaStructure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca
 
 
   #library(ggplot2)
-  pca.plot = ggplot2::ggplot(q.est.df, ggplot2::aes(x = PC1, y = PC2, group = cluster, col = cluster)) +
+  pca.plot = ggplot2::ggplot(q.est.df, ggplot2::aes(x = q.est.df$PC1, y = q.est.df$PC2,
+                                                    group = q.est.df$cluster, col = q.est.df$cluster)) +
     ggplot2::geom_hline(yintercept = 0, size = 0.1, linetype = "dashed") +
     ggplot2::geom_vline(xintercept = 0, size = 0.1, linetype = "dashed") +
     ggplot2::geom_point(size=3,alpha=0.8)+
@@ -111,9 +112,9 @@ pcaStructure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca
     ggplot2::ylab(label = paste("PC2 Proportion of variance", pc2, sep = " ")) +
     ggplot2::scale_y_continuous(breaks = seq(from = -20, to = 20, by = 2))+
     ggplot2::scale_x_continuous(breaks = seq(from = -20, to = 20, by = 2))+
-    ggplot2::guides(colour = guide_legend("Group"))+
+    ggplot2::guides(colour = ggplot2::guide_legend("Group"))+
     ggplot2::theme_minimal()+
-    ggplot2::theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5),
+    ggplot2::theme(panel.border = ggplot2::element_rect(colour = "black", fill=NA, size=0.5),
         legend.position = "bottom")
 
   if(plot.pca == T) {print(pca.plot)}

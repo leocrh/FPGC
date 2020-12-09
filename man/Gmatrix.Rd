@@ -4,7 +4,7 @@
 \alias{Gmatrix}
 \title{Generate G}
 \usage{
-Gmatrix(X = x, method = "cross.product.average")
+Gmatrix(X = NULL, method = "cross.product.average")
 }
 \arguments{
 \item{X}{Is a Marker matrix with marker Ids are in columns and Individuals are in rows}

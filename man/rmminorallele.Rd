@@ -4,7 +4,7 @@
 \alias{rmminorallele}
 \title{Filters MAF in X}
 \usage{
-rmminorallele(X = x, minor.threshold = 0.05, plot.minor.allele = F)
+rmminorallele(X = NULL, minor.threshold = 0.05, plot.minor.allele = F)
 }
 \arguments{
 \item{X}{Is a marker matrix with markers in columns and gids in rows}

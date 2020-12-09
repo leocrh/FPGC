@@ -17,7 +17,7 @@
 #' @param ... Arguments passed to the get_power function
 #' @export
 
-climdata = function(t = t, lon = NULL, lat = NULL, new.names = NULL, ... ){
+climdata = function(t = NULL, lon = NULL, lat = NULL, new.names = NULL, ... ){
 
 #library(nasapower)
 t.split= split(t, t$Loc_no)
@@ -27,13 +27,13 @@ d = lapply(t.split, function(x) nasapower::get_power(lonlat = c(x[,lon], x[,lat]
 
 d.d = reshape2::melt(d, id = c("LON", "LAT"))
 
-tmp <- plyr::ddply(d.d, .(L1, variable), transform, newid = paste(L1, seq_along(variable)))
+tmp <- plyr::ddply(d.d, plyr::.(L1, variable), transform, newid = paste(L1, seq_along(variable)))
 
 
 df = reshape2::dcast(tmp, L1 + LAT + LON + newid ~ variable, value.var = "value")
 df = df[,-which(colnames(df) == "newid")]
 
-library(zoo)
+#library(zoo)
 df$YYYYMMDD = as.Date(df$YYYYMMDD)
 
 df = df[order(df$L1, df$YEAR, df$MM, df$DD),]
@@ -88,7 +88,7 @@ periodic.extraction = function(df, locs.merged.climate = locs.merged.climate,
     cov.pp.sum = doBy::summaryBy(pp ~ group.means, data = period.covs, FUN = sum)
     f.env.covs = cbind(cov.means, cov.pp.sum$pp.sum)
     colnames(f.env.covs)[11] = "pp"
-    library(reshape2)
+    #library(reshape2)
     f.conv.melt = reshape2::melt(f.env.covs, id.vars = "group.means")
     conv.cast = reshape2::dcast(f.conv.melt, 1 ~ variable+group.means)
     loc.env.covariables = cbind(df, conv.cast)

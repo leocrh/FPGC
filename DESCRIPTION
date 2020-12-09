@@ -7,7 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "leonardoabdiel@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: FPGC has three sets of functions 1) o process models from the lme4 package to obtain various trial statistics; 2)to format and filter genotypic data to generate G matrix; and 3) to download and process climate data from the NASA POWER database
+Description: "FPGC has three sets of functions 1) to process models from the lme4 package to obtain various trial statistics; 
+                2)to format and filter genotypic data to generate G matrix; 
+                and 3) to download and process climate data from the NASA POWER database"
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

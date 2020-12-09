@@ -4,7 +4,7 @@
 \alias{haptodoubl}
 \title{Format IUPAC}
 \usage{
-haptodoubl(df = df, snp.col = NULL, is.gid.in.col = FALSE, snp.names = NULL)
+haptodoubl(df = NULL, snp.col = NULL, is.gid.in.col = FALSE, snp.names = NULL)
 }
 \arguments{
 \item{df}{Is a data frame that contains SNP data in IUPAC format}

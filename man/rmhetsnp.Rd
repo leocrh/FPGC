@@ -4,7 +4,7 @@
 \alias{rmhetsnp}
 \title{Remove heterozygotes in X}
 \usage{
-rmhetsnp(X = x, threshold = 10, plot.het = F)
+rmhetsnp(X = NULL, threshold = 10, plot.het = F)
 }
 \arguments{
 \item{X}{Is a marker matrix with markers in columns and gids in rows}

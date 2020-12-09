@@ -4,7 +4,7 @@
 \alias{hpmtonumericadd}
 \title{Hapmap to numeric}
 \usage{
-hpmtonumericadd(df = d, g.names = NULL, snp.col = NULL)
+hpmtonumericadd(df = NULL, g.names = NULL, snp.col = NULL)
 }
 \arguments{
 \item{df}{Is a dataframe where the markers are in columns and the gids are in rows}

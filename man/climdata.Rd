@@ -4,7 +4,7 @@
 \alias{climdata}
 \title{Download NASA POWER data}
 \usage{
-climdata(t = t, lon = NULL, lat = NULL, new.names = NULL, ...)
+climdata(t = NULL, lon = NULL, lat = NULL, new.names = NULL, ...)
 }
 \arguments{
 \item{t}{Is a dataframe with longitud and latitude in decimal formats and a "Loc_no" column as location ID.}
