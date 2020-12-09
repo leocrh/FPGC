@@ -2,7 +2,7 @@
 % Please edit documentation in R/snp format functions.R
 \name{hap.to.doubl}
 \alias{hap.to.doubl}
-\title{Function to convert HAPMAP format to double alleles with no separation, i.e, from A to AA, C to CC, R to AG, Y to CT, etc.,}
+\title{hap.to.doubl}
 \usage{
 hap.to.doubl(df = df, snp.col = NULL, is.gid.in.col = FALSE, snp.names = NULL)
 }
