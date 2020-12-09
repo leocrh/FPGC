@@ -23,7 +23,7 @@ trialstatslist = function(lm=lm, varg="g", varge=NULL,
                        gxe.model=F, save.output = T, file.name= "line-means"){
     message("Loading H2 functions")
     #source("C:/Users/LCRESPO/Documents/CIMMYT/Manuscripts/H2 functions.R")
-    message("Loading 'lmerTest' and 'stringr' packages")
+    #message("Loading 'lmerTest' and 'stringr' packages")
     #library(lmerTest)
     #library(stringr)
 
