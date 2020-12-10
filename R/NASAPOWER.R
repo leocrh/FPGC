@@ -34,7 +34,7 @@ df = reshape2::dcast(tmp, L1 + LAT + LON + newid ~ variable, value.var = "value"
 df = df[,-which(colnames(df) == "newid")]
 
 #library(zoo)
-df$YYYYMMDD = as.Date(df$YYYYMMDD, origin = "1900-01-01")
+df$YYYYMMDD = zoo::as.Date(df$YYYYMMDD)
 
 df = df[order(df$L1, df$YEAR, df$MM, df$DD),]
 colnames(df)[1] = "Loc_no"
