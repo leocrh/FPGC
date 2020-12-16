@@ -62,9 +62,9 @@ df
 #' Summarize climdata outputs
 #'
 #' @description Function to summarize the climate date by groups of days for a single location. It requires the locs.merged.climate object which is the climate data.
-#' Dates must be in the appropriate format otherwise errors are shown
-#' @param df Is a data frame with the date of sowing (sowing.d), or a date from which the variables will start to be summarized.
-#' @param locs.merged.climate Is a one-row data frame that contains the climate data
+#' Dates must be in the appropriate format otherwise errors are shown.
+#' @param df Is a one row (one location) data frame with the date of sowing (sowing.d), or a date from which the variables will start to be summarized.
+#' @param locs.merged.climate Is a list of locations with the climate data
 #' @param days Is the number of days after the initial date that will be consider to extract the data
 #' @param last.day Is the number of days that will be used to average the data. i.e, las.day must be <= than days and multiple of days
 #' @export
@@ -73,8 +73,8 @@ periodicextraction = function(df = NULL, locs.merged.climate = NULL,
                                days=120, last.day=120){
     period = days-1 # "last.day" must be multiple of "days"
     df$date.covs = df$sowing.d + period
-
-    period.covs = subset(locs.merged.climate, subset = Date >= df$sowing.d
+    tmp = locs.merged.climate[[df$Loc_no]]
+    period.covs = subset(tmp, subset = Date >= df$sowing.d
                          & Date <= df$date.covs
                          & Loc_no == df$Loc_no )
     period.covs
