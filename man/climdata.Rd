@@ -4,16 +4,26 @@
 \alias{climdata}
 \title{Download NASA POWER data}
 \usage{
-climdata(t = NULL, lon = NULL, lat = NULL, new.names = NULL, ...)
+climdata(
+  t = NULL,
+  lon = NULL,
+  lat = NULL,
+  loc.id = NULL,
+  set.newnames = T,
+  ...
+)
 }
 \arguments{
-\item{t}{Is a dataframe with longitud and latitude in decimal formats and a "Loc_no" column as location ID.}
+\item{t}{Is a dataframe with longitud and latitude in decimal formats and a location ID.}
 
 \item{lon}{Is the column index in t that contains the longitud in decimal format}
 
 \item{lat}{Is the column index in t that contains the latitude in decimal format}
 
-\item{new.names}{Is a vector of new names for the variables to be extracted. Used for simplicity in naming the variables.}
+\item{loc.id}{Is column name of the location ids in the dataframe t}
+
+\item{set.newnames}{Logical indicating if the meteorological variables will be renamed. Default is TRUE. Set to FALSE if a different set
+of variables will be downloaded. FALSE will keep the names as in NASA POWER}
 
 \item{...}{Arguments passed to the get_power function}
 }

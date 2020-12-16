@@ -6,19 +6,37 @@
 \usage{
 periodicextraction(
   df = NULL,
-  locs.merged.climate = NULL,
-  days = 120,
-  last.day = 120
+  climate.data = NULL,
+  total.days = 120,
+  by.periods = 10,
+  start.date = "sowing.d",
+  loc.id = "Loc_no",
+  Date = "Date",
+  mv.names = 9:18,
+  pp.name = "pp"
 )
 }
 \arguments{
-\item{df}{Is a one row (one location) data frame with the date of sowing (sowing.d), or a date from which the variables will start to be summarized.}
+\item{df}{A dataframe of one row (one location) that contains the date from which meteorological variables (MVs) will be extracted.}
 
-\item{locs.merged.climate}{Is a list of locations with the climate data}
+\item{climate.data}{A list of or dataframe of MVs.}
 
-\item{days}{Is the number of days after the initial date that will be consider to extract the data}
+\item{total.days}{The number of days from which the MVs will be extracted. Is the number of days after the initial date that will be consider to extract the data.}
 
-\item{last.day}{Is the number of days that will be used to average the data. i.e, las.day must be <= than days and multiple of days}
+\item{by.periods}{The number of days which the MVs will be averaged over. i.e, it must be multiple and <= than total.days.}
+
+\item{start.date}{The column name in df that contains the date from which the extraction will start}
+
+\item{loc.id}{The column name in df that contains the location ids}
+
+\item{Date}{The column name in climate.data that contains the date of the recorded MVs}
+
+\item{mv.names}{The index of the columns that contain the MVs in climate.data}
+
+\item{pp.name}{The name of the column that contains the rainfall. This is used since percipitation is summed over the by.periods, instead of averaged as the other MVs}
+}
+\value{
+
 }
 \description{
 Function to summarize the climate date by groups of days for a single location. It requires the locs.merged.climate object which is the climate data.
