@@ -73,7 +73,8 @@ periodicextraction = function(df = NULL, locs.merged.climate = NULL,
                                days=120, last.day=120){
     period = days-1 # "last.day" must be multiple of "days"
     df$date.covs = df$sowing.d + period
-    tmp = locs.merged.climate[[df$Loc_no]]
+    locno = as.character(df$Loc_no)
+    tmp = locs.merged.climate[[locno]]
     period.covs = subset(tmp, subset = Date >= df$sowing.d
                          & Date <= df$date.covs
                          & Loc_no == df$Loc_no )
