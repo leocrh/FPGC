@@ -19,7 +19,7 @@ periodicextraction(
 \arguments{
 \item{df}{A dataframe of one row (one location) that contains the date from which meteorological variables (MVs) will be extracted.}
 
-\item{climate.data}{A list of or dataframe of MVs.}
+\item{climate.data}{A list of of locations. Each element of the list must contain the MVs.}
 
 \item{total.days}{The number of days from which the MVs will be extracted. Is the number of days after the initial date that will be consider to extract the data.}
 

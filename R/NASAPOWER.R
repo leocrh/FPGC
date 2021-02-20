@@ -76,7 +76,7 @@ df
 #' @description Function to summarize the climate date by groups of days for a single location. It requires the locs.merged.climate object which is the climate data.
 #' Dates must be in the appropriate format otherwise errors are shown.
 #' @param df A dataframe of one row (one location) that contains the date from which meteorological variables (MVs) will be extracted.
-#' @param climate.data A list of or dataframe of MVs.
+#' @param climate.data A list of of locations. Each element of the list must contain the MVs.
 #' @param total.days The number of days from which the MVs will be extracted. Is the number of days after the initial date that will be consider to extract the data.
 #' @param by.periods The number of days which the MVs will be averaged over. i.e, it must be multiple and <= than total.days.
 #' @param start.date The column name in df that contains the date from which the extraction will start
@@ -119,7 +119,7 @@ periodicextraction <- function(df = NULL, climate.data = NULL,
     frm = base::paste(frm, "group.means", sep = "~")
     f.mvs = stats::as.formula(frm)
 
-    cov.means = doBy::summaryBy(formula = f.mvs, data = period.covs, FUN = mean, keep.names = TRUE)
+    cov.means = doBy::summaryBy(formula = f.mvs, data = period.covs, FUN = mean, keep.names = TRUE, na.rm=TRUE)
 
     p.form = paste(pp.name, "group.means", sep = "~")
     p.form = stats::as.formula(p.form)
@@ -127,10 +127,14 @@ periodicextraction <- function(df = NULL, climate.data = NULL,
     cov.pp.sum = doBy::summaryBy(formula = p.form, data = period.covs,
                                  FUN = sum, keep.names = TRUE)
     f.env.covs = cbind(cov.means, cov.pp.sum[,2])
-    colnames(f.env.covs)[11] = "pp"
     f.conv.melt = reshape2::melt(f.env.covs, id.vars = "group.means")
     conv.cast = reshape2::dcast(f.conv.melt, 1 ~ variable + group.means)
     loc.env.covariables = cbind(df, conv.cast[, 2:ncol(conv.cast)])
+
+    covs.final.name = colnames(loc.env.covariables)
+    covs.final.name = gsub(pattern = "cov.pp.sum\\[\\, 2\\]", replacement = "PP", x = covs.final.name)
+
+    colnames(loc.env.covariables) = covs.final.name
     loc.env.covariables
 
 }
