@@ -9,29 +9,21 @@
 
 #' Download NASA POWER data
 #'
-#' @description  Downloads climate data from the NASA POWER data base. This functions requires the nasapower library to be installed
+#' @description  Downloads climate data from the NASA POWER data base. It is useful for situations when data is required from seeveral sites.
 #' @param t Is a dataframe with longitud and latitude in decimal formats and a location ID.
 #' @param lon Is the column index in t that contains the longitud in decimal format
 #' @param lat Is the column index in t that contains the latitude in decimal format
 #' @param loc.id Is column name of the location ids in the dataframe t
-#' @param set.newnames Logical indicating if the meteorological variables will be renamed. Default is TRUE. Set to FALSE if a different set
-#' of variables will be downloaded. FALSE will keep the names as in NASA POWER
 #' @param ... Arguments passed to the get_power function
 #' @export
 
-climdata = function(t = NULL, lon = NULL, lat = NULL, loc.id = NULL, set.newnames = T, ... ){
+climdata = function(t = NULL, lon = NULL, lat = NULL, loc.id = NULL, ... ){
 
 t$Loc_no = t[, loc.id]
 t.split= split(t, t$Loc_no)
 t.split = lapply(t.split, droplevels)
-new.names = c("t.av", "t.min", "t.max",
-              "rel.h", "rad", "dew.p", "pp",
-              "cdd", "clrsky", "wind.speed")
 
-d = lapply(t.split, function(x) nasapower::get_power(lonlat = c(x[,lon], x[,lat]), temporal_average = "DAILY",
-                                                     pars=c("T2M","T2M_MIN", "T2M_MAX","RH2M",
-                                                            "ALLSKY_SFC_SW_DWN", "T2MDEW", "PRECTOT",
-                                                            "CDD0", "CLRSKY_SFC_SW_DWN", "WS2M"), ...))
+d = lapply(t.split, function(x) nasapower::get_power(lonlat = c(x[,lon], x[,lat]), temporal_average = "DAILY", ...))
 
 d.d = reshape2::melt(d, id = c("LON", "LAT"))
 
@@ -47,9 +39,6 @@ df = df[order(df$L1, df$YEAR, df$MM, df$DD),]
 colnames(df)[1] = loc.id
 colnames(df)[8] = "Date"
 
-if(set.newnames == T){
-colnames(df)[9:ncol(df)] = new.names
-}
 
 df = merge(x = df, y = t, by = "Loc_no")
 df

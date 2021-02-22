@@ -4,14 +4,7 @@
 \alias{climdata}
 \title{Download NASA POWER data}
 \usage{
-climdata(
-  t = NULL,
-  lon = NULL,
-  lat = NULL,
-  loc.id = NULL,
-  set.newnames = T,
-  ...
-)
+climdata(t = NULL, lon = NULL, lat = NULL, loc.id = NULL, ...)
 }
 \arguments{
 \item{t}{Is a dataframe with longitud and latitude in decimal formats and a location ID.}
@@ -22,11 +15,8 @@ climdata(
 
 \item{loc.id}{Is column name of the location ids in the dataframe t}
 
-\item{set.newnames}{Logical indicating if the meteorological variables will be renamed. Default is TRUE. Set to FALSE if a different set
-of variables will be downloaded. FALSE will keep the names as in NASA POWER}
-
 \item{...}{Arguments passed to the get_power function}
 }
 \description{
-Downloads climate data from the NASA POWER data base. This functions requires the nasapower library to be installed
+Downloads climate data from the NASA POWER data base. It is useful for situations when data is required from seeveral sites.
 }

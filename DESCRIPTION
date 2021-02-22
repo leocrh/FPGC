@@ -1,6 +1,6 @@
 Package: FPGC
 Title: Help functions to process Phenotypic Genomic and Climate data
-Version: 0.0.0.9000
+Version: 0.0.9
 Authors@R: 
     person(given = "Leo",
            family = "Crespo",
