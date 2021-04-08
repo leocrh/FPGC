@@ -112,7 +112,6 @@ rmmissingsnp = function(X = NULL, threshold = 20, plot.missing = F) {
   per.missing = (colSums(is.na(X))/nrow(X))*100 #computes % of missing marker data
     missing.t = per.missing[per.missing<threshold] # keeps marker data with less than missing info
   X = X[, names(X) %in% names(missing.t)] # Subsets X to marker data < missing info
-  print(X[1:5,1:5])
   X = as.data.frame(X)
 
   if(plot.missing == T) {
@@ -140,7 +139,6 @@ rmhetsnp = function(X = NULL, threshold = 10, plot.het = F) {
   het.keep = per.het[per.het < 10]
   X = as.data.frame(X)
   X = X[, names(X) %in% names(het.keep)]
-  print(X[1:5,1:5])
   X = as.matrix(X)
   message("The new dimenssions of X are:")
   print(dim(X))
@@ -183,7 +181,6 @@ rmminorallele = function(X = NULL, minor.threshold = 0.05, plot.minor.allele = F
   colnames(phat.maf) = "phat"
 
   X.maf = X[,rownames(phat.maf)]
-  print(X.maf[1:7,1:7])
   message("New dimensions of snp matrix")
   print(dim(X.maf))
 
