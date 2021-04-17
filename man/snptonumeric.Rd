@@ -13,6 +13,6 @@ snptonumeric(snp = NULL)
 Returns a SNP vector in numeric format
 }
 \description{
-Recodes a single snp in hapmap format (double letters) to numeric format. For biallelic SNPs homozygous are 0 and 2, and
+Recodes a single snp in hapmap format (double letters) to numeric format. For biallelic SNPs, homozygous are 0 and 2, and
 heterozygotes are 1.
 }
