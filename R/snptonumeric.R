@@ -5,7 +5,7 @@
 #' @param snp A single SNP vector or dataframe in hapmap format, e.g., two letters for nucleotides without using characters for separation.
 #'
 #' @return Returns a SNP vector in numeric format
-#'
+#'@export
 
 snptonumeric <- function(snp = NULL) {
 
@@ -65,6 +65,7 @@ snptonumeric <- function(snp = NULL) {
 #'
 #' @return A numeric SNP matrix
 #'
+#'@export
 #'
 snpMatrixToNumeric <- function(X = NULL) {
 
