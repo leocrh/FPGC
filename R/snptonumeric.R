@@ -59,12 +59,13 @@ snptonumeric <- function(snp = NULL) {
 }
 
 #' snpMatrixToNumeric
-#' @description Recodes a biallelic SNP matrix in hapmap format to numeric format, e.g., 0, 1, 2.
+#' @description Recodes a biallelic SNP matrix in hapmap format to numeric format, e.g., 0, 1, 2. The function applies the snptonumeric function
+#' over the columns of the SNP matrix.
 #'
-#' @param X A SNP matrix containing in its row names the id of the individuals and columns as SNPs
+#' @param X A SNP matrix containing in its row names the id of the individuals and columns as SNPs.
 #'
-#' @return A numeric SNP matrix
-#'
+#' @return A numeric SNP matrix.
+#' @seealso snptonumeric
 #'@export
 #'
 snpMatrixToNumeric <- function(X = NULL) {
@@ -74,6 +75,6 @@ snpMatrixToNumeric <- function(X = NULL) {
 
   X.num = apply(X, 2, snptonumeric)
   rownames(X.num) = rownames(X)
-  return(X)
+  return(X.num)
 
 }

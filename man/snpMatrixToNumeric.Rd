@@ -7,11 +7,15 @@
 snpMatrixToNumeric(X = NULL)
 }
 \arguments{
-\item{X}{A SNP matrix containing in its row names the id of the individuals and columns as SNPs}
+\item{X}{A SNP matrix containing in its row names the id of the individuals and columns as SNPs.}
 }
 \value{
-A numeric SNP matrix
+A numeric SNP matrix.
 }
 \description{
-Recodes a biallelic SNP matrix in hapmap format to numeric format, e.g., 0, 1, 2.
+Recodes a biallelic SNP matrix in hapmap format to numeric format, e.g., 0, 1, 2. The function applies the snptonumeric function
+over the columns of the SNP matrix.
+}
+\seealso{
+snptonumeric
 }
