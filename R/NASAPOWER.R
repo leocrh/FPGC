@@ -23,7 +23,7 @@ t$Loc_no = t[, loc.id]
 t.split= split(t, t$Loc_no)
 t.split = lapply(t.split, droplevels)
 
-d = lapply(t.split, function(x) nasapower::get_power(lonlat = c(x[,lon], x[,lat]), temporal_average = "DAILY", ...))
+d = lapply(t.split, function(x) nasapower::get_power(lonlat = c(x[,lon], x[,lat]), ...))
 
 d.d = reshape2::melt(d, id = c("LON", "LAT"))
 

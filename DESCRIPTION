@@ -16,13 +16,13 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
 Imports: 
-    ggplot2 (>= 3.3.3),
+    ggplot2 (>= 3.3.5),
     SNPassoc (>= 2.0.2),
     lmerTest (>= 3.1.3),
-    lme4 (>= 1.1.26),
+    lme4 (>= 1.1.27.1),
     reshape2 (>= 1.4.4),
-    doBy (>= 4.6.9),
-    nasapower (>= 3.0.1),
+    doBy (>= 4.6.11),
+    nasapower (>= 3.0.1.9001),
     plyr (>= 1.8.6),
     stringr (>= 1.4.0),
     zoo (>= 1.8.9),
