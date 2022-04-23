@@ -1,6 +1,6 @@
-#' snptonumeric
-#'@description  Recodes a single snp in hapmap format (double letters) to numeric format. For biallelic SNPs, homozygous are 0 and 2, and
-#'heterozygotes are 1.
+#' Recodes double nucleotides to numeric format
+#'@description  Recodes a single snp in hapmap format (double nubleotide letters i.e: AA, CC, GG, etc) to numeric format.
+#'For biallelic SNPs, homozygous are 0 and 2, and heterozygotes are 1.
 #'
 #' @param snp A single SNP vector or dataframe in hapmap format, e.g., two letters for nucleotides without using characters for separation.
 #'
@@ -34,12 +34,12 @@ snptonumeric <- function(snp = NULL) {
   hm.snps
 
   if(nrow(hm.snps) == 2){
-    hm.snps = hm.snps[order(hm.snps$Freq) ,]
+    hm.snps = hm.snps[order(-hm.snps$Freq) ,]
     hm.snps$snp.num = c(0, 2)
   }
 
   if(nrow(hm.snps) ==1) {
-    hm.snps$snp.num = 2
+    hm.snps$snp.num = 0
   }
 
   f.snp = rbind(na.snps, hm.snps, het.snps)

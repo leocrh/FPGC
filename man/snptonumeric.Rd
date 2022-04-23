@@ -2,7 +2,7 @@
 % Please edit documentation in R/snptonumeric.R
 \name{snptonumeric}
 \alias{snptonumeric}
-\title{snptonumeric}
+\title{Recodes double nucleotides to numeric format}
 \usage{
 snptonumeric(snp = NULL)
 }
@@ -13,6 +13,6 @@ snptonumeric(snp = NULL)
 Returns a SNP vector in numeric format
 }
 \description{
-Recodes a single snp in hapmap format (double letters) to numeric format. For biallelic SNPs, homozygous are 0 and 2, and
-heterozygotes are 1.
+Recodes a single snp in hapmap format (double nubleotide letters i.e: AA, CC, GG, etc) to numeric format.
+For biallelic SNPs, homozygous are 0 and 2, and heterozygotes are 1.
 }

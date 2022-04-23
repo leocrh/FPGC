@@ -48,43 +48,6 @@ haptodoubl = function(df = NULL,
 
 
 
-##%######################################################%##
-#                                                          #
-####      This function converts the hapmap format      ####
-####         to numeric by susing the SNPassoc          ####
-####          package. df is a dataframe where          ####
-####         the markers are in columns and the         ####
-####            gids are in rows. g.names is            ####
-####            a vector of gids, taken from            ####
-####          df. snp.col is the column number          ####
-####         where the marker data starts in df         ####
-#                                                          #
-##%######################################################%##
-
-#' Hapmap to numeric
-#'
-#' @description This function converts the hapmap format to numeric by using the SNPassoc package.
-#' @param df Is a dataframe where the markers are in columns and the gids are in rows
-#' @param g.names Is a vector of genotype ids (gids) taken from df
-#' @param snp.col Is the index where the marker data starts in the df
-#' @export
-
-
-#library(SNPassoc)
-
-hpmtonumericadd = function(df = NULL, g.names = NULL, snp.col = NULL){
-  df = SNPassoc::setupSNP(data = df, colSNPs = snp.col:ncol(df), sep = "")
-  df.num = apply(df, 2, SNPassoc::additive)
-  row.names(df.num) = g.names
-  message("Dimentions and Head of the numeric marker data")
-  print(dim(df.num))
-  print(df.num[1:5, 1:10])
-  return(df.num)
-}
-
-
-
-
 ############################################################
 #                                                          #
 #            This function removes the missing             #
