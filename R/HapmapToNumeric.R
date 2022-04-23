@@ -73,7 +73,7 @@ hapmaptonumeric <- function(gd.snp) {
 #### Multple snp appliction of hapmaptonumeric
 ####
 
-#' hapmaptonumeric_matrix
+#' SNP in hapmap format to numeric
 #' @description This function applyes the hapmaptonumeric function on a dataframe of SNP in hapmap format to recode as numeric: 0, 1, 2.
 #' The marker data requires that the SNPs are in columns and the individual are in rows.
 #'

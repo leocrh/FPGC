@@ -2,7 +2,7 @@
 % Please edit documentation in R/HapmapToNumeric.R
 \name{hapmaptonumeric_matrix}
 \alias{hapmaptonumeric_matrix}
-\title{hapmaptonumeric_matrix}
+\title{SNP in hapmap format to numeric}
 \usage{
 hapmaptonumeric_matrix(X = NULL, snp.start.col = 2)
 }
@@ -16,4 +16,5 @@ A dataframe of SNPs in numeric format
 }
 \description{
 This function applyes the hapmaptonumeric function on a dataframe of SNP in hapmap format to recode as numeric: 0, 1, 2.
+The marker data requires that the SNPs are in columns and the individual are in rows.
 }
