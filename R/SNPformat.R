@@ -99,7 +99,7 @@ rmmissingsnp = function(X = NULL, threshold = 20, plot.missing = F) {
 
 rmhetsnp = function(X = NULL, threshold = 10, plot.het = F) {
   per.het = apply(X, 2, function(x) {((sum(x[x==1]))/length(x))*100})
-  het.keep = per.het[per.het < 10]
+  het.keep = per.het[per.het < threshold]
   X = as.data.frame(X)
   X = X[, names(X) %in% names(het.keep)]
   X = as.matrix(X)
