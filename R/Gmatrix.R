@@ -108,8 +108,8 @@ pcaStructure = function(G, n.clusters = 3, plot.var = T, plot.pca = T,  save.pca
     ggplot2::geom_hline(yintercept = 0, size = 0.1, linetype = "dashed") +
     ggplot2::geom_vline(xintercept = 0, size = 0.1, linetype = "dashed") +
     ggplot2::geom_point(size=3,alpha=0.8)+
-    ggplot2::xlab(label = paste("PC1 Proportion of variance", pc1, sep = " ")) +
-    ggplot2::ylab(label = paste("PC2 Proportion of variance", pc2, sep = " ")) +
+    ggplot2::xlab(label = paste("PC1", pc1, "%", sep = " ")) +
+    ggplot2::ylab(label = paste("PC2", pc2, "%", sep = " ")) +
     ggplot2::scale_y_continuous(breaks = seq(from = -20, to = 20, by = 2))+
     ggplot2::scale_x_continuous(breaks = seq(from = -20, to = 20, by = 2))+
     ggplot2::guides(colour = ggplot2::guide_legend("Group"))+
