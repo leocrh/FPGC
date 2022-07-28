@@ -40,6 +40,7 @@ check()
 ?hapmaptonumeric_matrix
 ?snptonumeric
 ?snpMatrixToNumeric
+?haptodoubl
 
 
 document() #Create documentation

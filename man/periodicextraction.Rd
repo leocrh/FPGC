@@ -35,9 +35,6 @@ periodicextraction(
 
 \item{pp.name}{The name of the column that contains the rainfall. This is used since percipitation is summed over the by.periods, instead of averaged as the other MVs}
 }
-\value{
-
-}
 \description{
 Function to summarize the climate date by groups of days for a single location. It requires the locs.merged.climate object which is the climate data.
 Dates must be in the appropriate format otherwise errors are shown.

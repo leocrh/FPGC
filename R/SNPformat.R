@@ -1,18 +1,23 @@
 
 #' Format IUPAC
 #'
-#' @description Function to convert HAPMAP format to double alleles with no separation, i.e, from A to AA, C to CC, R to AG, Y to CT, etc.,
+#' @description Function to convert HAPMAP format to double alleles with no separation,
+#' i.e, from A to AA, C to CC, R to AG, Y to CT, etc. Markers should be in columns and GIDs in rows.
 #' @param df Is a data frame that contains SNP data in IUPAC format
 #' @param snp.col Is the index where the SNP data starts in the data frame. Set to NULL if the SNPs are in rows
 #' @param is.gid.in.col Is a Logical to indicate if the individuals are in columns (TRUE) or in rows (FALSE). Default value is FALSE
-#' @param snp.names Is an index of the column where the SNP ids are if is.gid.in.col = TRUE
 #' @export
 
 haptodoubl = function(df = NULL,
                         snp.col=NULL,
                         is.gid.in.col = FALSE,
                         snp.names = NULL) {
-  df.sub = df[, snp.col:ncol(df)]
+  if(is.null(snp.col)){
+    df.sub = df
+  } else if(snp.col > 0){
+    df.sub = df.sub = df[, snp.col:ncol(df)]
+  }
+
   df.sub = apply(df.sub, 2, as.character)
   df.sub[df.sub == "A"] = "AA"
   df.sub[df.sub == "G"] = "GG"
@@ -27,22 +32,20 @@ haptodoubl = function(df = NULL,
   df.sub[df.sub == "M"] = "AC"
 
   df.sub[df.sub == "N"] = NA
+  df.sub = as.data.frame(df.sub)
+  df.sub = apply(df.sub, 2, as.factor)
 
-  df = full_join(x = df, df.sub)
-  df[, snp.col:ncol(df)] = apply(df[, snp.col:ncol(df)], 2, as.factor)
-  message("DIMENTIONS OF MARKER MATRIX")
-  print(dim(df))
-  return(df)
+  if(is.null(snp.col)){
+    message("DIMENTIONS OF MARKER MATRIX")
+    print(dim(df.sub))
+    return(df.sub)
+  } else if(snp.col > 0) {
+    df = cbind(df[, 1:snp.col -1], df.sub)
 
-  if(is.gid.in.col == TRUE) {
-    df = t(df)
-    colnames(df) = df[snp.names,]
-    df = df[2:nrow(df),]
     message("DIMENTIONS OF MARKER MATRIX")
     print(dim(df))
     return(df)
-  }
-
+   }
 
 }
 
