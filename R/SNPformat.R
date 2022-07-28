@@ -9,13 +9,13 @@
 #' @export
 
 haptodoubl = function(df = NULL,
-                        snp.col=NULL,
+                        snp.col = NULL,
                         is.gid.in.col = FALSE,
                         snp.names = NULL) {
   if(is.null(snp.col)){
     df.sub = df
   } else if(snp.col > 0){
-    df.sub = df.sub = df[, snp.col:ncol(df)]
+    df.sub = df[, snp.col:ncol(df)]
   }
 
   df.sub = apply(df.sub, 2, as.character)
