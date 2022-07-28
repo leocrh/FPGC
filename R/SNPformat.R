@@ -33,6 +33,7 @@ haptodoubl = function(df = NULL,
 
   df.sub[df.sub == "N"] = NA
   df.sub = as.data.frame(df.sub)
+  rownames(df.sub) = rownames(df)
   df.sub = apply(df.sub, 2, as.factor)
 
   if(is.null(snp.col)){
