@@ -28,11 +28,11 @@ haptodoubl = function(df = NULL,
 
   df.sub[df.sub == "N"] = NA
 
-  df = cbind(df[,1:snp.col-1], df.sub)
+  df = full_join(x = df, df.sub)
   df[, snp.col:ncol(df)] = apply(df[, snp.col:ncol(df)], 2, as.factor)
   message("DIMENTIONS OF MARKER MATRIX")
   print(dim(df))
-  df
+  return(df)
 
   if(is.gid.in.col == TRUE) {
     df = t(df)
