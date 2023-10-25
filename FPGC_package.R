@@ -41,7 +41,7 @@ check()
 ?snptonumeric
 ?snpMatrixToNumeric
 ?haptodoubl
-
+?rmMissingGenotypes
 
 document() #Create documentation
 

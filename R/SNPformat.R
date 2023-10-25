@@ -6,6 +6,7 @@
 #' @param df Is a data frame that contains SNP data in IUPAC format
 #' @param snp.col Is the index where the SNP data starts in the data frame. Set to NULL if the SNPs are in rows
 #' @param is.gid.in.col Is a Logical to indicate if the individuals are in columns (TRUE) or in rows (FALSE). Default value is FALSE
+#' @param snp.names Not used
 #' @export
 
 haptodoubl = function(df = NULL,

@@ -3,7 +3,7 @@
 
 #' Removing missing genotypes/lines/entries/GIDs
 #'
-#' @description This functions removes genotyped individuals from a marker matrix that do not meet
+#' @description This function removes genotyped individuals from a marker matrix that do not meet
 #' the minimum threshold of marker information
 #'
 #' @param X A marker matrix, usually obtained from the routines in FPGC

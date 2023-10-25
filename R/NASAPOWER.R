@@ -74,7 +74,6 @@ df
 #' @param mv.names The index of the columns that contain the MVs in climate.data
 #' @param pp.name The name of the column that contains the rainfall. This is used since percipitation is summed over the by.periods, instead of averaged as the other MVs
 #'
-#' @return
 #' @export
 #'
 

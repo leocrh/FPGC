@@ -12,6 +12,8 @@ haptodoubl(df = NULL, snp.col = NULL, is.gid.in.col = FALSE, snp.names = NULL)
 \item{snp.col}{Is the index where the SNP data starts in the data frame. Set to NULL if the SNPs are in rows}
 
 \item{is.gid.in.col}{Is a Logical to indicate if the individuals are in columns (TRUE) or in rows (FALSE). Default value is FALSE}
+
+\item{snp.names}{Not used}
 }
 \description{
 Function to convert HAPMAP format to double alleles with no separation,
