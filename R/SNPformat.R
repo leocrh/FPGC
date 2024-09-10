@@ -148,6 +148,11 @@ rmminorallele = function(X = NULL, minor.threshold = 0.05, plot.minor.allele = F
   phat.maf = as.data.frame(subset(MAF, MAF > minor.threshold))
   colnames(phat.maf) = "phat"
 
+  if(nrow(phat.maf) == 0) {
+    stop("There are no markers with MAF larger than the minor.threshold")
+  }
+
+
   X.maf = X[,rownames(phat.maf)]
   message("New dimensions of snp matrix")
   print(dim(X.maf))
