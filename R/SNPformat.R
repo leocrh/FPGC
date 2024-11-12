@@ -184,33 +184,47 @@ rmminorallele = function(X = NULL, minor.threshold = 0.05, plot.minor.allele = F
 #' Impute X
 #'
 #'
-#' @description Impute is a function to perfomr marker imputation and provde a list of monomorphic markers with missing values.
+#' @description Impute is a function to performs marker imputation and provide a list of monomorphic markers with missing values.
 #' Monomorphic markers witout missing values have to be removed manually.
-#' @param X Is a numeric marker matrix
+#' @param X Is a numeric marker matrix or dataframe with numeric marker values (0, 1, 2, etc.)
 #' @export
 
+Impute <- function(X) {
+  # Ensure X is a numeric matrix
+  X <- as.matrix(X)
+  monomorphic = numeric()
 
+  for (i in 1:ncol(X)) {
+    cat("Imputing Marker ", i, "\n")
 
-Impute=function(X)
-{
-  monomorphic=numeric()
-  for(i in 1:ncol(X))
-  {
-    cat('Imputing Marker ',i,'\n')
-    {
-      if(length(as.numeric(table(X[,i])))==1)
-      {
-        monomorphic=c(monomorphic,i)
-      }else{
-        tmp=table(X[,i])
-        x=as.numeric(names(tmp))
-        X[which(is.na(X[,i])),i]=sample(x=x,size=sum(is.na(X[,i])),replace=TRUE,prob=tmp/sum(tmp))
-      }
+    # Generate the frequency table, excluding NAs
+    tmp = table(X[, i], useNA = "no")
+
+    if (length(tmp) == 0) {
+      # Case: Column contains only NA values
+      cat("Warning: Column", i, "contains only NAs. Skipping imputation for this column.\n")
+      next
+    }
+
+    if (length(tmp) == 1) {
+      # Case: Column is monomorphic (only one unique value)
+      monomorphic = c(monomorphic, i)
+    } else {
+      # Case: Column has multiple unique values, perform sampling-based imputation
+      x = as.numeric(names(tmp))
+      X[is.na(X[, i]), i] = sample(x = x, size = sum(is.na(X[,i])),
+                                   replace = TRUE, prob = tmp / sum(tmp))
     }
   }
-  return(list(X=X,monomorphic=monomorphic))
 
+  # Remove monomorphic columns from X
+  if (length(monomorphic) > 0) {
+    X <- X[, -monomorphic, drop = FALSE]
+  }
+
+  return(list(X = X, monomorphic = monomorphic))
 }
+
 
 #' Cleans Impute
 #'
